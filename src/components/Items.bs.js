@@ -13,7 +13,7 @@ var styles = ReactNative.StyleSheet.create({
       }
     });
 
-function Items$Items(Props) {
+function Items(Props) {
   var context = React.useContext(AppContext.context);
   var setCharges = context.setCharges;
   var items = [
@@ -51,13 +51,11 @@ function Items$Items(Props) {
             });
 }
 
-var Items = {
-  make: Items$Items
-};
+var make = Items;
 
 export {
   styles ,
-  Items ,
+  make ,
   
 }
 /* styles Not a pure module */

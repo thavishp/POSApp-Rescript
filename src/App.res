@@ -10,8 +10,6 @@
 // open ReactNative
 open ReactNavigation
 
-open Home
-open Items
 open AppContext
 
 module MainStackScreen = {

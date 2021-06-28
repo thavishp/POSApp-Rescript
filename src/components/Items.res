@@ -12,30 +12,30 @@ let styles = {
   })
 }
 
-module Items = {
-  @react.component
-  let make = (~navigation as _, ~route as _) => {
-    let context = React.useContext(AppContext.context)
-    let setCharges = context.setCharges
+// module Items = {
+@react.component
+let make = (~navigation as _, ~route as _) => {
+  let context = React.useContext(AppContext.context)
+  let setCharges = context.setCharges
 
-    let items = [
-      {"name": "Banana", "price": 1},
-      {"name": "Apple", "price": 2},
-      {"name": "Mango", "price": 3},
-    ]
+  let items = [
+    {"name": "Banana", "price": 1},
+    {"name": "Apple", "price": 2},
+    {"name": "Mango", "price": 3},
+  ]
 
-    let items = Belt.Array.mapWithIndex(items, (i, item) => {
-      <View key={Belt.Int.toString(i)}>
-        <Text>
-          {(item["name"] ++ "    Price: " ++ Belt.Int.toString(item["price"]))->React.string}
-        </Text>
-        <Button
-          title={"Charge " ++ item["name"]}
-          onPress={_input => setCharges(prev => Js.Array.concat([item["price"]], prev))}
-        />
-      </View>
-    })
+  let items = Belt.Array.mapWithIndex(items, (i, item) => {
+    <View key={Belt.Int.toString(i)}>
+      <Text>
+        {(item["name"] ++ "    Price: " ++ Belt.Int.toString(item["price"]))->React.string}
+      </Text>
+      <Button
+        title={"Charge " ++ item["name"]}
+        onPress={_input => setCharges(prev => Js.Array.concat([item["price"]], prev))}
+      />
+    </View>
+  })
 
-    <View style={styles["sectionContainer"]}> {React.array(items)} </View>
-  }
+  <View style={styles["sectionContainer"]}> {React.array(items)} </View>
 }
+// }

@@ -26,7 +26,7 @@ var styles = ReactNative.StyleSheet.create({
       }
     });
 
-function Home$Home(Props) {
+function Home(Props) {
   var context = React.useContext(AppContext.context);
   var text = context.text;
   var setText = context.setText;
@@ -93,13 +93,11 @@ function Home$Home(Props) {
                     })));
 }
 
-var Home = {
-  make: Home$Home
-};
+var make = Home;
 
 export {
   styles ,
-  Home ,
+  make ,
   
 }
 /* styles Not a pure module */

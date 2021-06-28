@@ -36,7 +36,7 @@ function App$MainStackScreen(Props) {
                               title: params !== undefined ? params.name : "Home"
                             };
                     }),
-                  component: Home.Home.make
+                  component: Home.make
                 }), React.createElement($$Screen.make, {
                   name: "Items",
                   options: (function (props) {
@@ -45,7 +45,7 @@ function App$MainStackScreen(Props) {
                               title: params !== undefined ? params.name : "Home"
                             };
                     }),
-                  component: Items.Items.make
+                  component: Items.make
                 }));
 }
 
