@@ -10,8 +10,9 @@
 // open ReactNative
 open ReactNavigation
 
-include Home
-include Items
+open Home
+open Items
+open AppContext
 
 module MainStackScreen = {
   open ReactNative
@@ -67,5 +68,15 @@ module RootStackScreen = {
 }
 
 let app = () => {
-  <RootStackScreen />
+  let (text, setText) = React.useState(_ => "")
+  let (charges: array<int>, setCharges) = React.useState(_ => [])
+
+  let settings = {
+    text: text,
+    charges: charges,
+    setText: setText,
+    setCharges: setCharges,
+  }
+
+  <AppContext.Provider value=settings> <RootStackScreen /> </AppContext.Provider>
 }

@@ -13,8 +13,14 @@ let styles = {
 module Home = {
   @react.component
   let make = (~navigation as _, ~route as _) => {
-    let (text, setText) = React.useState(_ => "")
-    let (charges, setCharges) = React.useState(_ => [])
+    // let (text, setText) = React.useState(_ => "")
+    // let (charges, setCharges) = React.useState(_ => [])
+
+    let context = React.useContext(AppContext.context)
+    let text = context.text
+    let setText = context.setText
+    let charges = context.charges
+    let setCharges = context.setCharges
 
     let chargesList = Belt.Array.mapWithIndex(charges, (i, charge) => {
       <Text key={Belt.Int.toString(i)}> {Belt.Int.toString(charge)->React.string} </Text>

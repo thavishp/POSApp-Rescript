@@ -3,6 +3,7 @@
 import * as Curry from "bs-platform/lib/es6/curry.js";
 import * as React from "react";
 import * as Belt_Int from "bs-platform/lib/es6/belt_Int.js";
+import * as AppContext from "../AppContext.bs.js";
 import * as Belt_Array from "bs-platform/lib/es6/belt_Array.js";
 import * as ReactNative from "react-native";
 
@@ -26,16 +27,11 @@ var styles = ReactNative.StyleSheet.create({
     });
 
 function Home$Home(Props) {
-  var match = React.useState(function () {
-        return "";
-      });
-  var setText = match[1];
-  var text = match[0];
-  var match$1 = React.useState(function () {
-        return [];
-      });
-  var setCharges = match$1[1];
-  var charges = match$1[0];
+  var context = React.useContext(AppContext.context);
+  var text = context.text;
+  var setText = context.setText;
+  var charges = context.charges;
+  var setCharges = context.setCharges;
   var chargesList = Belt_Array.mapWithIndex(charges, (function (i, charge) {
           return React.createElement(ReactNative.Text, {
                       children: String(charge),

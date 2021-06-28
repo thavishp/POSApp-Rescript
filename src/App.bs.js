@@ -3,6 +3,7 @@
 import * as Home from "./components/Home.bs.js";
 import * as Items from "./components/Items.bs.js";
 import * as React from "react";
+import * as AppContext from "./AppContext.bs.js";
 import * as ReactNative from "react-native";
 import * as Stack$ReactNavigation from "rescript-react-navigation/src/Stack.bs.js";
 import * as Native from "@react-navigation/native";
@@ -111,19 +112,29 @@ var RootStackScreen = {
 };
 
 function app(param) {
-  return React.createElement(App$RootStackScreen, {});
+  var match = React.useState(function () {
+        return "";
+      });
+  var match$1 = React.useState(function () {
+        return [];
+      });
+  var settings_text = match[0];
+  var settings_charges = match$1[0];
+  var settings_setText = match[1];
+  var settings_setCharges = match$1[1];
+  var settings = {
+    text: settings_text,
+    charges: settings_charges,
+    setText: settings_setText,
+    setCharges: settings_setCharges
+  };
+  return React.createElement(AppContext.Provider.make, {
+              value: settings,
+              children: React.createElement(App$RootStackScreen, {})
+            });
 }
 
-var styles = Home.styles;
-
-var Home$1 = Home.Home;
-
-var Items$1 = Items.Items;
-
 export {
-  styles ,
-  Home$1 as Home,
-  Items$1 as Items,
   MainStackScreen ,
   RootStackScreen ,
   app ,
