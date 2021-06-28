@@ -1,1 +1,0 @@
-{ "dirs" : [ "src" , "src/components" ] , "pkgs" : [ [ "rescript-react-native" , "/Users/thavishperera/code/POSApp/node_modules/rescript-react-native" ] , [ "rescript-react-navigation" , "/Users/thavishperera/code/POSApp/node_modules/rescript-react-navigation" ] , [ "@rescript/react" , "/Users/thavishperera/code/POSApp/node_modules/@rescript/react" ] ] , "generated" : [] }
