@@ -104,6 +104,7 @@ odoc_gen/*.cmxs
 .bs_dir_cache
 
 .bsbuild
+.bsb.lock
 lib/prebuilt.ninja
 lib/release.ninja
 lib/build.ninja
