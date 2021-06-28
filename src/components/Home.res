@@ -17,16 +17,16 @@ module Home = {
     let (charges, setCharges) = React.useState(_ => [])
 
     let chargesList = Belt.Array.mapWithIndex(charges, (i, charge) => {
-      <Text key={Belt.Int.toString(i)}> {charge->React.string} </Text>
+      <Text key={Belt.Int.toString(i)}> {Belt.Int.toString(charge)->React.string} </Text>
     })
 
-    // let chargesList = []
-    // Belt.Array.forEachWithIndex(charges, (i, charge) => {
-    //   chargesList = Js.Array.concat([{<Text key={Belt.Int.toString(i)}> {charge->React.string} </Text>}], chargesList))
-    // })
-
     let buttonPressed = _input => {
-      setCharges(prev => Js.Array.concat([text], prev))
+      if text != "" {
+        switch Belt.Int.fromString(text) {
+        | None => Js.log("Enter a numerical value")
+        | Some(val) => setCharges(prev => Js.Array.concat([val], prev))
+        }
+      }
     }
 
     let onChangeText = input => {
@@ -35,14 +35,13 @@ module Home = {
 
     let sumArray = array => {
       Belt.Array.reduce(array, 0, (acc, item) => {
-        acc + Belt.Option.getExn(Belt.Int.fromString(item))
+        acc + item
       })
     }
 
     <SafeAreaView>
       <View style={styles["sectionContainer"]}>
         <Button title={"Charge"} onPress={buttonPressed} />
-        <Text> {"This is a test\n"->React.string} </Text>
         <TextInput
           value={text}
           placeholder={"placeholder text"}

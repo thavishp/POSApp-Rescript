@@ -4,7 +4,6 @@ import * as Curry from "bs-platform/lib/es6/curry.js";
 import * as React from "react";
 import * as Belt_Int from "bs-platform/lib/es6/belt_Int.js";
 import * as Belt_Array from "bs-platform/lib/es6/belt_Array.js";
-import * as Belt_Option from "bs-platform/lib/es6/belt_Option.js";
 import * as ReactNative from "react-native";
 
 var styles = ReactNative.StyleSheet.create({
@@ -39,14 +38,23 @@ function Home$Home(Props) {
   var charges = match$1[0];
   var chargesList = Belt_Array.mapWithIndex(charges, (function (i, charge) {
           return React.createElement(ReactNative.Text, {
-                      children: charge,
+                      children: String(charge),
                       key: String(i)
                     });
         }));
   var buttonPressed = function (_input) {
-    return Curry._1(setCharges, (function (prev) {
-                  return prev.concat([text]);
-                }));
+    if (text === "") {
+      return ;
+    }
+    var val = Belt_Int.fromString(text);
+    if (val !== undefined) {
+      return Curry._1(setCharges, (function (prev) {
+                    return prev.concat([val]);
+                  }));
+    } else {
+      console.log("Enter a numerical value");
+      return ;
+    }
   };
   var onChangeText = function (input) {
     return Curry._1(setText, (function (_prev) {
@@ -55,7 +63,7 @@ function Home$Home(Props) {
   };
   var sumArray = function (array) {
     return Belt_Array.reduce(array, 0, (function (acc, item) {
-                  return acc + Belt_Option.getExn(Belt_Int.fromString(item)) | 0;
+                  return acc + item | 0;
                 }));
   };
   return React.createElement(ReactNative.SafeAreaView, {
@@ -66,8 +74,6 @@ function Home$Home(Props) {
                 }, React.createElement(ReactNative.Button, {
                       onPress: buttonPressed,
                       title: "Charge"
-                    }), React.createElement(ReactNative.Text, {
-                      children: "This is a test\n"
                     }), React.createElement(ReactNative.TextInput, {
                       keyboardType: "numeric",
                       onChangeText: onChangeText,
