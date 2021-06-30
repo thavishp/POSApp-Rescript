@@ -9,8 +9,8 @@
 
 // open ReactNative
 open ReactNavigation
-
 open AppContext
+open NativeBaseBindings
 
 module MainStackScreen = {
   open ReactNative
@@ -76,5 +76,7 @@ let app = () => {
     setCharges: setCharges,
   }
 
-  <AppContext.Provider value=settings> <RootStackScreen /> </AppContext.Provider>
+  <AppContext.Provider value=settings>
+    <NativeBaseProvider> <RootStackScreen /> </NativeBaseProvider>
+  </AppContext.Provider>
 }

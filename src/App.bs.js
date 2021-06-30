@@ -4,6 +4,7 @@ import * as Home from "./components/Home.bs.js";
 import * as Items from "./components/Items.bs.js";
 import * as React from "react";
 import * as AppContext from "./AppContext.bs.js";
+import * as NativeBase from "native-base";
 import * as ReactNative from "react-native";
 import * as Stack$ReactNavigation from "rescript-react-navigation/src/Stack.bs.js";
 import * as Native from "@react-navigation/native";
@@ -130,7 +131,9 @@ function app(param) {
   };
   return React.createElement(AppContext.Provider.make, {
               value: settings,
-              children: React.createElement(App$RootStackScreen, {})
+              children: React.createElement(NativeBase.NativeBaseProvider, {
+                    children: React.createElement(App$RootStackScreen, {})
+                  })
             });
 }
 

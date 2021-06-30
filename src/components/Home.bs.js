@@ -5,6 +5,7 @@ import * as React from "react";
 import * as Belt_Int from "bs-platform/lib/es6/belt_Int.js";
 import * as AppContext from "../AppContext.bs.js";
 import * as Belt_Array from "bs-platform/lib/es6/belt_Array.js";
+import * as NativeBase from "native-base";
 import * as ReactNative from "react-native";
 
 var styles = ReactNative.StyleSheet.create({
@@ -57,11 +58,6 @@ function Home(Props) {
                   return input;
                 }));
   };
-  var sumArray = function (array) {
-    return Belt_Array.reduce(array, 0, (function (acc, item) {
-                  return acc + item | 0;
-                }));
-  };
   return React.createElement(ReactNative.SafeAreaView, {
               children: null
             }, React.createElement(ReactNative.View, {
@@ -83,14 +79,79 @@ function Home(Props) {
                           children: "Charges:"
                         }), React.createElement(ReactNative.ScrollView, {
                           children: chargesList
-                        }))), React.createElement(ReactNative.View, {
-                  style: styles.sectionContainer,
-                  children: null
-                }, React.createElement(ReactNative.Text, {
-                      children: "Total: "
-                    }), React.createElement(ReactNative.Text, {
-                      children: String(sumArray(charges))
-                    })));
+                        }))), React.createElement(NativeBase.Center, {
+                  children: React.createElement(NativeBase.VStack, {
+                        children: null,
+                        space: 3
+                      }, React.createElement(NativeBase.HStack, {
+                            children: null,
+                            space: 3,
+                            alignItems: "center"
+                          }, React.createElement(NativeBase.Center, {
+                                children: "1",
+                                size: 16,
+                                bg: "dark.400",
+                                rounded: "md",
+                                shadow: 3
+                              }), React.createElement(NativeBase.Center, {
+                                children: "2",
+                                size: 16,
+                                bg: "dark.400",
+                                rounded: "md",
+                                shadow: 3
+                              }), React.createElement(NativeBase.Center, {
+                                children: "3",
+                                size: 16,
+                                bg: "dark.400",
+                                rounded: "md",
+                                shadow: 3
+                              })), React.createElement(NativeBase.HStack, {
+                            children: null,
+                            space: 3,
+                            alignItems: "center"
+                          }, React.createElement(NativeBase.Center, {
+                                children: "4",
+                                size: 16,
+                                bg: "dark.400",
+                                rounded: "md",
+                                shadow: 3
+                              }), React.createElement(NativeBase.Center, {
+                                children: "5",
+                                size: 16,
+                                bg: "dark.400",
+                                rounded: "md",
+                                shadow: 3
+                              }), React.createElement(NativeBase.Center, {
+                                children: "6",
+                                size: 16,
+                                bg: "dark.400",
+                                rounded: "md",
+                                shadow: 3
+                              })), React.createElement(NativeBase.HStack, {
+                            children: null,
+                            space: 3,
+                            alignItems: "center"
+                          }, React.createElement(NativeBase.Center, {
+                                children: "7",
+                                size: 16,
+                                bg: "dark.400",
+                                rounded: "md",
+                                shadow: 3
+                              }), React.createElement(NativeBase.Center, {
+                                children: "8",
+                                size: 16,
+                                bg: "dark.400",
+                                rounded: "md",
+                                shadow: 3
+                              }), React.createElement(NativeBase.Center, {
+                                children: "9",
+                                size: 16,
+                                bg: "dark.400",
+                                rounded: "md",
+                                shadow: 3
+                              }))),
+                  py: 10
+                }));
 }
 
 var make = Home;

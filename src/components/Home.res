@@ -1,4 +1,5 @@
 open ReactNative
+open NativeBaseBindings
 
 let styles = {
   open Style
@@ -35,11 +36,11 @@ let make = (~navigation as _, ~route as _) => {
     setText(_prev => input)
   }
 
-  let sumArray = array => {
-    Belt.Array.reduce(array, 0, (acc, item) => {
-      acc + item
-    })
-  }
+  // let sumArray = array => {
+  //   Belt.Array.reduce(array, 0, (acc, item) => {
+  //     acc + item
+  //   })
+  // }
 
   <SafeAreaView>
     <View style={styles["sectionContainer"]}>
@@ -56,9 +57,28 @@ let make = (~navigation as _, ~route as _) => {
         <ScrollView> {React.array(chargesList)} </ScrollView>
       </View>
     </View>
-    <View style={styles["sectionContainer"]}>
-      <Text> {"Total: "->React.string} </Text>
-      <Text> {Belt.Int.toString(sumArray(charges))->React.string} </Text>
-    </View>
+    <Center py={10}>
+      <VStack space={3}>
+        <HStack space={3} alignItems="center">
+          <Center size={16} bg="dark.400" rounded="md" shadow={3}> {"1"->React.string} </Center>
+          <Center bg="dark.400" size={16} rounded="md" shadow={3}> {"2"->React.string} </Center>
+          <Center size={16} bg="dark.400" rounded="md" shadow={3}> {"3"->React.string} </Center>
+        </HStack>
+        <HStack space={3} alignItems="center">
+          <Center size={16} bg="dark.400" rounded="md" shadow={3}> {"4"->React.string} </Center>
+          <Center bg="dark.400" size={16} rounded="md" shadow={3}> {"5"->React.string} </Center>
+          <Center size={16} bg="dark.400" rounded="md" shadow={3}> {"6"->React.string} </Center>
+        </HStack>
+        <HStack space={3} alignItems="center">
+          <Center size={16} bg="dark.400" rounded="md" shadow={3}> {"7"->React.string} </Center>
+          <Center bg="dark.400" size={16} rounded="md" shadow={3}> {"8"->React.string} </Center>
+          <Center size={16} bg="dark.400" rounded="md" shadow={3}> {"9"->React.string} </Center>
+        </HStack>
+      </VStack>
+    </Center>
+    // <View style={styles["sectionContainer"]}>
+    //   <Text> {"Total: "->React.string} </Text>
+    //   <Text> {Belt.Int.toString(sumArray(charges))->React.string} </Text>
+    // </View>
   </SafeAreaView>
 }
