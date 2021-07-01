@@ -2,9 +2,9 @@
 
 import * as Curry from "bs-platform/lib/es6/curry.js";
 import * as React from "react";
-import * as Belt_Int from "bs-platform/lib/es6/belt_Int.js";
 import * as AppContext from "../AppContext.bs.js";
 import * as Belt_Array from "bs-platform/lib/es6/belt_Array.js";
+import * as Belt_Float from "bs-platform/lib/es6/belt_Float.js";
 import * as NativeBase from "native-base";
 import * as ReactNative from "react-native";
 
@@ -29,57 +29,84 @@ var styles = ReactNative.StyleSheet.create({
 
 function Home(Props) {
   var context = React.useContext(AppContext.context);
-  var text = context.text;
-  var setText = context.setText;
+  var match = React.useState(function () {
+        return "0.00";
+      });
+  var setText = match[1];
+  var text = match[0];
   var charges = context.charges;
   var setCharges = context.setCharges;
-  var chargesList = Belt_Array.mapWithIndex(charges, (function (i, charge) {
-          return React.createElement(ReactNative.Text, {
-                      children: String(charge),
-                      key: String(i)
-                    });
+  var chargesList = Belt_Array.mapWithIndex(charges, (function (param, charge) {
+          return {
+                  value: "$" + charge.toFixed(2)
+                };
         }));
-  var buttonPressed = function (_input) {
-    if (text === "") {
-      return ;
+  var numberPressed = function (number) {
+    if (text === "0.00") {
+      Curry._1(setText, (function (_prev) {
+              return "";
+            }));
     }
-    var val = Belt_Int.fromString(text);
-    if (val !== undefined) {
-      return Curry._1(setCharges, (function (prev) {
-                    return prev.concat([val]);
-                  }));
-    } else {
-      console.log("Enter a numerical value");
-      return ;
-    }
+    return Curry._1(setText, (function (prev) {
+                  return prev.concat(number);
+                }));
   };
-  var onChangeText = function (input) {
+  var clearNumber = function (param) {
     return Curry._1(setText, (function (_prev) {
-                  return input;
+                  return "0.00";
+                }));
+  };
+  var submitCharge = function (param) {
+    var val = Belt_Float.fromString(text);
+    if (val !== undefined) {
+      if (val <= 0.0) {
+        Curry._1(setText, (function (param) {
+                return "0.00";
+              }));
+      } else {
+        Curry._1(setCharges, (function (prev) {
+                return prev.concat([val]);
+              }));
+      }
+    } else {
+      Curry._1(setText, (function (param) {
+              return "0.00";
+            }));
+    }
+    return Curry._1(setText, (function (param) {
+                  return "0.00";
+                }));
+  };
+  var sumArray = function (array) {
+    return Belt_Array.reduce(array, 0.0, (function (acc, item) {
+                  return acc + item;
                 }));
   };
   return React.createElement(ReactNative.SafeAreaView, {
               children: null
-            }, React.createElement(ReactNative.View, {
-                  style: styles.sectionContainer,
-                  children: null
-                }, React.createElement(ReactNative.Button, {
-                      onPress: buttonPressed,
-                      title: "Charge"
-                    }), React.createElement(ReactNative.TextInput, {
-                      keyboardType: "numeric",
-                      onChangeText: onChangeText,
-                      onSubmitEditing: buttonPressed,
-                      placeholder: "placeholder text",
-                      value: text
-                    }), React.createElement(ReactNative.View, {
-                      style: styles.sectionContainer,
-                      children: null
-                    }, React.createElement(ReactNative.Text, {
-                          children: "Charges:"
-                        }), React.createElement(ReactNative.ScrollView, {
-                          children: chargesList
-                        }))), React.createElement(NativeBase.Center, {
+            }, React.createElement(NativeBase.Container, {
+                  children: null,
+                  m: 5,
+                  w: "100%"
+                }, React.createElement(NativeBase.Text, {
+                      children: text
+                    }), React.createElement(ReactNative.FlatList, {
+                      data: chargesList,
+                      keyExtractor: (function (param, i) {
+                          return String(i);
+                        }),
+                      renderItem: (function (item) {
+                          return React.createElement(ReactNative.TouchableOpacity, {
+                                      onPress: (function (param) {
+                                          console.log(item.index);
+                                          
+                                        }),
+                                      children: React.createElement(NativeBase.Text, {
+                                            children: item.item.value
+                                          })
+                                    });
+                        })
+                    })), React.createElement(NativeBase.Center, {
                   children: React.createElement(NativeBase.VStack, {
                         children: null,
                         space: 3
@@ -87,70 +114,162 @@ function Home(Props) {
                             children: null,
                             space: 3,
                             alignItems: "center"
-                          }, React.createElement(NativeBase.Center, {
-                                children: "1",
-                                size: 16,
-                                bg: "dark.400",
-                                rounded: "md",
-                                shadow: 3
-                              }), React.createElement(NativeBase.Center, {
-                                children: "2",
-                                size: 16,
-                                bg: "dark.400",
-                                rounded: "md",
-                                shadow: 3
-                              }), React.createElement(NativeBase.Center, {
-                                children: "3",
-                                size: 16,
-                                bg: "dark.400",
-                                rounded: "md",
-                                shadow: 3
+                          }, React.createElement(ReactNative.TouchableOpacity, {
+                                onPress: (function (param) {
+                                    return numberPressed("1");
+                                  }),
+                                children: React.createElement(NativeBase.Center, {
+                                      children: "1",
+                                      size: "16",
+                                      bg: "dark.400",
+                                      rounded: "md",
+                                      shadow: 3
+                                    })
+                              }), React.createElement(ReactNative.TouchableOpacity, {
+                                onPress: (function (param) {
+                                    return numberPressed("2");
+                                  }),
+                                children: React.createElement(NativeBase.Center, {
+                                      children: "2",
+                                      size: "16",
+                                      bg: "dark.400",
+                                      rounded: "md",
+                                      shadow: 3
+                                    })
+                              }), React.createElement(ReactNative.TouchableOpacity, {
+                                onPress: (function (param) {
+                                    return numberPressed("3");
+                                  }),
+                                children: React.createElement(NativeBase.Center, {
+                                      children: "3",
+                                      size: "16",
+                                      bg: "dark.400",
+                                      rounded: "md",
+                                      shadow: 3
+                                    })
                               })), React.createElement(NativeBase.HStack, {
                             children: null,
                             space: 3,
                             alignItems: "center"
-                          }, React.createElement(NativeBase.Center, {
-                                children: "4",
-                                size: 16,
-                                bg: "dark.400",
-                                rounded: "md",
-                                shadow: 3
-                              }), React.createElement(NativeBase.Center, {
-                                children: "5",
-                                size: 16,
-                                bg: "dark.400",
-                                rounded: "md",
-                                shadow: 3
-                              }), React.createElement(NativeBase.Center, {
-                                children: "6",
-                                size: 16,
-                                bg: "dark.400",
-                                rounded: "md",
-                                shadow: 3
+                          }, React.createElement(ReactNative.TouchableOpacity, {
+                                onPress: (function (param) {
+                                    return numberPressed("4");
+                                  }),
+                                children: React.createElement(NativeBase.Center, {
+                                      children: "4",
+                                      size: "16",
+                                      bg: "dark.400",
+                                      rounded: "md",
+                                      shadow: 3
+                                    })
+                              }), React.createElement(ReactNative.TouchableOpacity, {
+                                onPress: (function (param) {
+                                    return numberPressed("5");
+                                  }),
+                                children: React.createElement(NativeBase.Center, {
+                                      children: "5",
+                                      size: "16",
+                                      bg: "dark.400",
+                                      rounded: "md",
+                                      shadow: 3
+                                    })
+                              }), React.createElement(ReactNative.TouchableOpacity, {
+                                onPress: (function (param) {
+                                    return numberPressed("6");
+                                  }),
+                                children: React.createElement(NativeBase.Center, {
+                                      children: "6",
+                                      size: "16",
+                                      bg: "dark.400",
+                                      rounded: "md",
+                                      shadow: 3
+                                    })
                               })), React.createElement(NativeBase.HStack, {
                             children: null,
                             space: 3,
                             alignItems: "center"
-                          }, React.createElement(NativeBase.Center, {
-                                children: "7",
-                                size: 16,
-                                bg: "dark.400",
-                                rounded: "md",
-                                shadow: 3
-                              }), React.createElement(NativeBase.Center, {
-                                children: "8",
-                                size: 16,
-                                bg: "dark.400",
-                                rounded: "md",
-                                shadow: 3
-                              }), React.createElement(NativeBase.Center, {
-                                children: "9",
-                                size: 16,
-                                bg: "dark.400",
-                                rounded: "md",
-                                shadow: 3
-                              }))),
+                          }, React.createElement(ReactNative.TouchableOpacity, {
+                                onPress: (function (param) {
+                                    return numberPressed("7");
+                                  }),
+                                children: React.createElement(NativeBase.Center, {
+                                      children: "7",
+                                      size: "16",
+                                      bg: "dark.400",
+                                      rounded: "md",
+                                      shadow: 3
+                                    })
+                              }), React.createElement(ReactNative.TouchableOpacity, {
+                                onPress: (function (param) {
+                                    return numberPressed("8");
+                                  }),
+                                children: React.createElement(NativeBase.Center, {
+                                      children: "8",
+                                      size: "16",
+                                      bg: "dark.400",
+                                      rounded: "md",
+                                      shadow: 3
+                                    })
+                              }), React.createElement(ReactNative.TouchableOpacity, {
+                                onPress: (function (param) {
+                                    return numberPressed("9");
+                                  }),
+                                children: React.createElement(NativeBase.Center, {
+                                      children: "9",
+                                      size: "16",
+                                      bg: "dark.400",
+                                      rounded: "md",
+                                      shadow: 3
+                                    })
+                              })), React.createElement(NativeBase.HStack, {
+                            children: null,
+                            space: 3,
+                            alignItems: "center"
+                          }, React.createElement(ReactNative.TouchableOpacity, {
+                                onPress: clearNumber,
+                                children: React.createElement(NativeBase.Center, {
+                                      children: "C",
+                                      size: "16",
+                                      bg: "dark.400",
+                                      rounded: "md",
+                                      shadow: 3
+                                    })
+                              }), React.createElement(ReactNative.TouchableOpacity, {
+                                onPress: (function (param) {
+                                    return numberPressed("0");
+                                  }),
+                                children: React.createElement(NativeBase.Center, {
+                                      children: "0",
+                                      size: "16",
+                                      bg: "dark.400",
+                                      rounded: "md",
+                                      shadow: 3
+                                    })
+                              }), React.createElement(ReactNative.TouchableOpacity, {
+                                onPress: (function (param) {
+                                    return numberPressed(".");
+                                  }),
+                                children: React.createElement(NativeBase.Center, {
+                                      children: ".",
+                                      size: "16",
+                                      bg: "dark.400",
+                                      rounded: "md",
+                                      shadow: 3
+                                    })
+                              })), React.createElement(NativeBase.Button, {
+                            children: "Add Item",
+                            size: "md",
+                            variant: "outline",
+                            onPress: submitCharge
+                          })),
                   py: 10
+                }), React.createElement(NativeBase.Container, {
+                  children: React.createElement(NativeBase.Text, {
+                        children: "$" + sumArray(charges).toFixed(2),
+                        bold: true
+                      }),
+                  m: 5,
+                  w: "100%"
                 }));
 }
 

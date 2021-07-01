@@ -11,12 +11,28 @@ var VStack = {};
 
 var Center = {};
 
+var $$Text = {};
+
+var Button = {};
+
+var ScrollView = {};
+
+var Item = {};
+
+var List = {
+  Item: Item
+};
+
 export {
   NativeBaseProvider ,
   Container ,
   HStack ,
   VStack ,
   Center ,
+  $$Text ,
+  Button ,
+  ScrollView ,
+  List ,
   
 }
 /* No side effect */

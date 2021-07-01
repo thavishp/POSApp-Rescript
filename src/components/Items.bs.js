@@ -19,15 +19,15 @@ function Items(Props) {
   var items = [
     {
       name: "Banana",
-      price: 1
+      price: 1.0
     },
     {
       name: "Apple",
-      price: 2
+      price: 2.0
     },
     {
       name: "Mango",
-      price: 3
+      price: 3.0
     }
   ];
   var items$1 = Belt_Array.mapWithIndex(items, (function (i, item) {

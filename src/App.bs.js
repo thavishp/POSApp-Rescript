@@ -114,19 +114,12 @@ var RootStackScreen = {
 
 function app(param) {
   var match = React.useState(function () {
-        return "";
-      });
-  var match$1 = React.useState(function () {
         return [];
       });
-  var settings_text = match[0];
-  var settings_charges = match$1[0];
-  var settings_setText = match[1];
-  var settings_setCharges = match$1[1];
+  var settings_charges = match[0];
+  var settings_setCharges = match[1];
   var settings = {
-    text: settings_text,
     charges: settings_charges,
-    setText: settings_setText,
     setCharges: settings_setCharges
   };
   return React.createElement(AppContext.Provider.make, {

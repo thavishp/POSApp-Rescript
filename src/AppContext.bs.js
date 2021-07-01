@@ -4,18 +4,12 @@ import * as React from "react";
 
 var settings_charges = [];
 
-function settings_setText(param) {
-  
-}
-
 function settings_setCharges(param) {
   
 }
 
 var settings = {
-  text: "",
   charges: settings_charges,
-  setText: settings_setText,
   setCharges: settings_setCharges
 };
 

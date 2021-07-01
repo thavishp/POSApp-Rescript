@@ -1,16 +1,12 @@
 // open ReactNative
 
 type context = {
-  text: string,
-  charges: array<int>,
-  setText: (string => string) => unit,
-  setCharges: (array<int> => array<int>) => unit,
+  charges: array<float>,
+  setCharges: (array<float> => array<float>) => unit,
 }
 
 let settings = {
-  text: "",
   charges: [],
-  setText: _ => (),
   setCharges: _ => (),
 }
 

@@ -19,15 +19,15 @@ let make = (~navigation as _, ~route as _) => {
   let setCharges = context.setCharges
 
   let items = [
-    {"name": "Banana", "price": 1},
-    {"name": "Apple", "price": 2},
-    {"name": "Mango", "price": 3},
+    {"name": "Banana", "price": 1.0},
+    {"name": "Apple", "price": 2.0},
+    {"name": "Mango", "price": 3.0},
   ]
 
   let items = Belt.Array.mapWithIndex(items, (i, item) => {
     <View key={Belt.Int.toString(i)}>
       <Text>
-        {(item["name"] ++ "    Price: " ++ Belt.Int.toString(item["price"]))->React.string}
+        {(item["name"] ++ "    Price: " ++ Belt.Float.toString(item["price"]))->React.string}
       </Text>
       <Button
         title={"Charge " ++ item["name"]}

@@ -10,7 +10,6 @@
 // open ReactNative
 open ReactNavigation
 open AppContext
-open NativeBaseBindings
 
 module MainStackScreen = {
   open ReactNative
@@ -66,17 +65,16 @@ module RootStackScreen = {
 }
 
 let app = () => {
-  let (text, setText) = React.useState(_ => "")
-  let (charges: array<int>, setCharges) = React.useState(_ => [])
+  let (charges: array<float>, setCharges) = React.useState(_ => [])
 
   let settings = {
-    text: text,
     charges: charges,
-    setText: setText,
     setCharges: setCharges,
   }
 
   <AppContext.Provider value=settings>
-    <NativeBaseProvider> <RootStackScreen /> </NativeBaseProvider>
+    <NativeBaseBindings.NativeBaseProvider>
+      <RootStackScreen />
+    </NativeBaseBindings.NativeBaseProvider>
   </AppContext.Provider>
 }
